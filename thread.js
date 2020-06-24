@@ -1,5 +1,7 @@
 const {logError} = require('thread.utils');
 
+const DEFAULT_MAX_TICK_EXECUTIONS = 5;
+
 const STATE_CREATED = 0;
 const STATE_RUNNING = 1;
 const STATE_SUSPENDED = 2;
@@ -44,6 +46,7 @@ class Thread {
 		this.handler = new ThreadHandler(this, gen || this.run.bind(this));
 		this.continued = false;
 		this.v = 0;
+		this.maxTickExecutions = DEFAULT_MAX_TICK_EXECUTIONS;
 		this.state = STATE_CREATED;
 		if (start) {
 			this.runner.queue(this);

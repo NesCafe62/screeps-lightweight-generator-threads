@@ -70,7 +70,8 @@ class RoomManager {
 		this.loadTime = Game.time;
 		this.towersId = [];
 		this.updateStructures = new Thread(RoomsRunner, this.updateStructures.bind(this));
-		this.towersThread = new Thread(RoomsRunner, this.runTowers.bind(this), false); // "false" means don't automatically start the thread
+		this.towersThread = new Thread(RoomsRunner, this.runTowers.bind(this), false);
+		// "false" means don't automatically start the thread
 	}
 	
 	load() {
@@ -97,7 +98,8 @@ class RoomManager {
 		}).map(tower => tower.id);
 		
 		if (this.towersId.length > 0 && !this.towersThread.isRunning) {
-			this.towersThread.restart(); // restart towers thread if it wasn't already running
+			// restart towers thread if it wasn't already running
+			this.towersThread.restart();
 		}
 		
 		yield thread.restart(20); // restart thread after 20 ticks
@@ -118,7 +120,8 @@ class RoomManager {
 			// ... shooting code
 		}
 		
-		yield thread.restart(); // repeat this fucntion from very beginning in the next tick
+		// repeat this function from very beginning in the next tick
+		yield thread.restart();
 	}
 
 }
@@ -298,7 +301,8 @@ You can override methods to add additional logic.
 class CreepThread extends Thread {
 
 	constructor(creepEntity) {
-		super(CreepsRunner, creepEntity.run.bind(creepEntity), false); // you can specify other method instead of own Thread "run"
+		// you can specify other method instead of own Thread "run"
+		super(CreepsRunner, creepEntity.run.bind(creepEntity), false);
 		this.creep = creepEntity;
 	}
 

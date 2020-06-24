@@ -7,7 +7,7 @@ Copy `runner.js`, `thread.js` and `thread.utils.js` into your screeps brunch dir
 # Usage
 
 ## Creating Runner and Threads
-```
+```js
 const Runner = require('runner');
 const Thread = require('thread');
 
@@ -34,7 +34,7 @@ module.exports.loop = function() {
 
 You can create multiple runners to control the order of execution for different thread types.
 
-```
+```js
 const roomsRunner = new Runner();
 const creepsRunner = new Runner();
 
@@ -46,7 +46,7 @@ module.exports.loop = function() {
 
 Also you can register runners in global so you can easy access them in other modules.
 
-```
+```js
 global.RoomsRunner = new Runner();
 
 // in other module
@@ -61,7 +61,7 @@ Note: Remember that global reset (it happends everytime you upload new code or s
 
 In that case you will need to use `bind(this)`.
 
-```
+```js
 class RoomManager {
 
 	constructor(room) {
@@ -240,7 +240,7 @@ Runs a single iteration of generator (from last `yield` to next `yield` statemen
 
 You can extend Thread class. By default if no generator fucntion provided for 2nd construcor argument it uses own "run" method (which is empty for base Thread class)
 
-```
+```js
 class SpawnThread extends Thread {
 
 	constructor(roomManager) {
@@ -294,7 +294,7 @@ class SpawnThread extends Thread {
 
 You can override methods to add additional logic.
 
-```
+```js
 class CreepThread extends Thread {
 
 	constructor(creepEntity) {
@@ -380,7 +380,7 @@ For example if you created a thread for creep and after creep was dead your prev
 
 If your threads state depend on game objects or game events, better to create new runners and reinstantiate all threads if you detect multiple globals.
 
-```
+```js
 let creepsRunner;
 
 function instantiateThreads() {

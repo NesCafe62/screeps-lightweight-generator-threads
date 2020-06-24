@@ -63,7 +63,7 @@ class Runner {
 				let running, k = 0;
 				do {
 					k++;
-					if (k > 5) {
+					if (k > thread.maxTickExecutions) {
 						logError(new Error('RECURSION!!'));
 						thread.log();
 						break;

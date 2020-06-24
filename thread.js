@@ -122,7 +122,7 @@ class Thread {
 	schedule(time) {
 		if (this.state === STATE_SUSPENDED) {
 			this.v++;
-		} else if (this.state === STATE_CREATED) {
+		} else if (this.state === STATE_CREATED || this.state === STATE_FINISHED) {
 			return;
 		}
 		this.runner.schedule(time, this);
@@ -134,7 +134,7 @@ class Thread {
 			return;
 		}
 		if (delay <= 0) {
-			logError(new Error('Thread sleep delay must be grater than zero'));
+			logError(new Error('Thread sleep delay should not be negative'));
 			return;
 		}
 		this.v++;

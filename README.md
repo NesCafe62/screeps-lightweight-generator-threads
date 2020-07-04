@@ -146,6 +146,7 @@ If thread is not in one of allowed state when one of these method is called, thr
 
 ### `start()`
 Starts thread. Changes it's state to `RUNNING`.
+
 Thread gets added to runner's active queue.
 
 Allowed states: `CREATED`, `RUNNING`
@@ -153,6 +154,7 @@ Allowed states: `CREATED`, `RUNNING`
 
 ### `finish()`
 Finishes thread. Changes it's state to `FINISHED`.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
 
 Allowed states: `CREATED`, `RUNNING`, `SUSPENED`, `FINISHED`
@@ -160,7 +162,9 @@ Allowed states: `CREATED`, `RUNNING`, `SUSPENED`, `FINISHED`
 
 ### `restart(delay = 0)`
 Restarts thread. Which means resets generator function internal postion to the very begining.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Supports restarting finished (`FINISHED` state) threads.
 
 Note: If generator is not a function but an iterable instance (like a class with defined property `[Symbol.iterator]`) there will be error "Thread restarting only allowed when generator is a function". And thread will be finished (`FINISHED` state)
@@ -170,10 +174,12 @@ If delay is 0: (immediate restart)
 
 If delay is > 0: (delayed restart)
 > Changes it's state to `SUSPENDED`.
+>
 > Thread gets added to runner's suspended queue, which will resume execution (but from begginning of the generator function) as soon as required `Game.time` will come
 
 IF delay is Infinity: (restart with suspend)
 > Changes it's state to `SUSPENDED`.
+>
 > But will not add thread to runner's suspened queue. (Will need to resume the thread by calling `resume()` or `restart()`)
 
 Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
@@ -181,7 +187,9 @@ Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
 
 ### `restartSuspended()`
 Shorthand for `restart(Infinity)`. Restarts thread. Resets generator function internal postion to the very begining.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Later need to call `resume()` or `restart()` to resume execution.
 
 Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
@@ -189,8 +197,11 @@ Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
 
 ### `suspend()`
 Suspends the thread. Changes it's state to `SUSPENDED`.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Later need to call `resume()` or `restart()` to resume execution.
+
 Only takes effect if curent thread state is `RUNNING`.
 
 Allowed states: `RUNNING`
@@ -198,8 +209,11 @@ Allowed states: `RUNNING`
 
 ### `schedule(time)`
 Resumes the thread. Changes it's state to `SUSPENDED`.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Thread gets added to runner's suspended queue, which will resume execution as soon as required `Game.time` will come.
+
 Internal generator position is preserved.
 
 Note: `runner.time` is updated to `Game.time` only at the biginning of `runner.tick()`, so better not to use `schedule(Game.time + delay)` if you are calling it before `runner.tick()`.
@@ -208,11 +222,16 @@ Allowed states: `RUNNING`, `SUSPENED`
 
 
 ### `sleep(delay)`
-Suspends the thread. Changes it's state to `SUSPENDED`. Alias of `schedule(runner.time + delay)`
+Suspends the thread. Changes it's state to `SUSPENDED`. Alias of `schedule(runner.time + delay)`.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Thread gets added to runner's suspended queue, which will resume execution as soon as required `Game.time` will come.
+
 Internal generator position is preserved.
+
 `delay` should not be negative.
+
 Only takes effect if curent thread state is `RUNNING`.
 
 Allowed states: `RUNNING`
@@ -220,17 +239,23 @@ Allowed states: `RUNNING`
 
 ### `resume()`
 Resumes the thread. Changes it's state to `RUNNING`.
+
 All thread references in runner's queue and suspened queue created before that call will be removed.
+
 Thread gets added to runner's active queue.
-If current state is `CREATED` acts like `start()` method
+
+If current state is `CREATED` acts like `start()` method.
 
 Allowed states: `CREATED`, `SUSPENDED`
 
 
 ### `continue()`
 Toggles internal `continued` variable to true. Runner will repeat thread's `tick()` method many times if this variable will remain to be `true`.
+
 `continued` is reset to `false` at the beginnng of the thread's `tick()` method. Means you need to call `continue()` before the ending of each thead's tick iteration to remain.
+
 Also there is a built-in protection from recursion.
+
 Only takes effect if curent thread state is `RUNNING`.
 
 Allowed states: `RUNNING`
@@ -382,6 +407,7 @@ class CreepEntity {
 ## Multiple globals
 
 Sometimes screeps server runs older version of your global, that store older version of runners and threads in heap.
+
 For example if you created a thread for creep and after creep was dead your previous runner finished the thread, but older version still have instance of thread for that creep in `RUNNING` (sctive) state.
 
 If your threads state depend on game objects or game events, better to create new runners and reinstantiate all threads if you detect multiple globals.

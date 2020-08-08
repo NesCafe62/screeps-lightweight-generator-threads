@@ -71,7 +71,7 @@ class RoomManager {
 		this.roomName = room.name;
 		this.loadTime = Game.time;
 		this.towersId = [];
-		this.updateStructures = new Thread(RoomsRunner, this.updateStructures.bind(this));
+		this.updateStructuresThread = new Thread(RoomsRunner, this.updateStructures.bind(this));
 		this.towersThread = new Thread(RoomsRunner, this.runTowers.bind(this), false);
 		// "false" means don't automatically start the thread
 	}

@@ -13,13 +13,13 @@ const Thread = require('thread');
 
 const creepsRunner = new Runner();
 
-const thread1 = new Thread(creepsRunner, function() * {
+const thread1 = new Thread(creepsRunner, function * () {
 	console.log('thread1 started');
 	yield; // skip to next tick
 	console.log('thread1 finished');
 });
 
-const thread2 = new Thread(creepsRunner, function() * {
+const thread2 = new Thread(creepsRunner, function * () {
 	console.log('thread2 started');
 	yield; // skip to next tick
 	console.log('thread2 finished');

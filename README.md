@@ -50,7 +50,7 @@ Also you can register runners in global so you can easy access them in other mod
 global.RoomsRunner = new Runner();
 
 // in other module
-const thread = new Thread(RoomsRunner, function(thread) * {
+const thread = new Thread(RoomsRunner, function * (thread) {
 	// ...
 });
 ```

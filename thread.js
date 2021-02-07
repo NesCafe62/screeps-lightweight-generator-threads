@@ -71,7 +71,7 @@ class Thread {
 	get isSuspended() {
 		return this.state === STATE_SUSPENDED;
 	}
-
+	
 	start() {
 		if (this.state !== STATE_CREATED) {
 			return;
@@ -162,6 +162,10 @@ class Thread {
 		this.continued = true;
 	}
 
+	afterTimeout() {
+		this.restart();
+	}
+
 	tick() {
 		try {
 			this.continued = false;
@@ -177,6 +181,7 @@ class Thread {
 
 }
 
-// global.Thread = Thread; // Uncomment this line to register in gloal namespace
+// Uncomment this line to register Thread in global namespace:
+// global.Thread = Thread;
 
 module.exports = Thread;

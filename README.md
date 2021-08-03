@@ -268,7 +268,7 @@ Runs a single iteration of generator (from last `yield` to next `yield` statemen
 
 ## Extending Thread class
 
-You can extend Thread class. By default if no generator function provided for 2nd construcor argument it uses own "run" method (which is empty for base Thread class)
+You can extend Thread class. By default if no generator function provided for 2nd constructor argument it uses own "run" method (which is empty for base Thread class)
 
 ```js
 class SpawnThread extends Thread {

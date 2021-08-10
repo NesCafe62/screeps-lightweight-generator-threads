@@ -422,7 +422,7 @@ class CreepEntity {
 
 Sometimes screeps server runs older version of your global, that store older version of runners and threads in heap.
 
-For example if you created a thread for creep and after creep was dead your previous runner finished the thread, but older version still have instance of thread for that creep in `RUNNING` (sctive) state.
+For example if you created a thread for creep and after creep was dead your previous runner finished the thread, but older version still have instance of thread for that creep in `RUNNING` (active) state.
 
 If your threads state depend on game objects or game events, better to create new runners and reinstantiate all threads if you detect multiple globals.
 

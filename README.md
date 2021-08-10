@@ -131,7 +131,7 @@ class RoomManager {
 
 ## Thread states
 
-Thread states cab be:
+Thread states can be:
 * `CREATED` Thread will be in this state after creation and if 3rd argument (automatically run thread) was "false"
 * `RUNNING` Active thread state, will continue to run in each tick while generator function not finished and executes `yield;` statement
 * `SUSPENDED` Thread was suspended and will not run automatically, but it preserves it's internal postion (line where last `yield` was occured)

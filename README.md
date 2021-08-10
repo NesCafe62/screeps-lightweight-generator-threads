@@ -198,7 +198,7 @@ Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
 ### `suspend()`
 Suspends the thread. Changes it's state to `SUSPENDED`.
 
-All thread references in runner's queue and suspened queue created before that call will be removed.
+All references of this thread in runner's queue and suspened queue that were created earlier will be removed (invalidated).
 
 Later need to call `resume()` or `restart()` to resume execution.
 

@@ -188,7 +188,7 @@ Allowed states: `CREATED`, `RUNNING`, `SUSPENDED`, `FINISHED`
 ### `restartSuspended()`
 Shorthand for `restart(Infinity)`. Restarts thread. Resets generator function internal postion to the very begining.
 
-All thread references in runner's queue and suspened queue created before that call will be removed.
+All references of this thread in runner's queue and suspened queue that were created earlier will be removed (invalidated).
 
 Later need to call `resume()` or `restart()` to resume execution.
 
@@ -210,7 +210,7 @@ Allowed states: `RUNNING`
 ### `schedule(time)`
 Resumes the thread. Changes it's state to `SUSPENDED`.
 
-All thread references in runner's queue and suspened queue created before that call will be removed.
+All references of this thread in runner's queue and suspened queue that were created earlier will be removed (invalidated).
 
 Thread gets added to runner's suspended queue, which will resume execution as soon as required `Game.time` will come.
 
@@ -224,7 +224,7 @@ Allowed states: `RUNNING`, `SUSPENED`
 ### `sleep(delay)`
 Suspends the thread. Changes it's state to `SUSPENDED`. Alias of `schedule(runner.time + delay)`.
 
-All thread references in runner's queue and suspened queue created before that call will be removed.
+All references of this thread in runner's queue and suspened queue that were created earlier will be removed (invalidated).
 
 Thread gets added to runner's suspended queue, which will resume execution as soon as required `Game.time` will come.
 
@@ -240,7 +240,7 @@ Allowed states: `RUNNING`
 ### `resume()`
 Resumes the thread. Changes it's state to `RUNNING`.
 
-All thread references in runner's queue and suspened queue created before that call will be removed.
+All references of this thread in runner's queue and suspened queue that were created earlier will be removed (invalidated).
 
 Thread gets added to runner's active queue.
 

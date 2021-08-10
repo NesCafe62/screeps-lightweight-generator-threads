@@ -57,7 +57,7 @@ const thread = new Thread(RoomsRunner, function * (thread) {
 
 Thread instance will be provided by first agrument of the generator function. Which is optional, you can ommit it if not going to use.
 
-Note: Remember that global reset (it happends everytime you upload new code or server restart your IVM instance) will clear all threads and their data. You can save some data in memory that will help to reinstantiate threads.
+> Note: Remember that global reset (it happends everytime you upload new code or server restart your IVM instance) will clear all threads and their data. You can save some data in memory that will help to reinstantiate threads.
 
 ## Using class method as thread generator function
 
@@ -129,6 +129,15 @@ class RoomManager {
 }
 ```
 
+> Note: `yield thread.someMethod();` is same as
+> `thread.someMethod();`
+> `yield;`
+> it is just shorter
+
+> Note: `yield` result is not used.
+> But this is different from `yield * someMethod()`, this will call nested generator function.
+> Can pass therad reference to access it inside method (for execution control): `yield * someMethod(thread);`
+
 ## Thread states
 
 Thread states can be:
@@ -167,7 +176,7 @@ All thread references in runner's queue and suspened queue created before that c
 
 Supports restarting finished (`FINISHED` state) threads.
 
-Note: If generator is not a function but an iterable instance (like a class with defined property `[Symbol.iterator]`) there will be error "Thread restarting only allowed when generator is a function". And thread will be finished (`FINISHED` state)
+> Note: If generator is not a function but an iterable instance (like a class with defined property `[Symbol.iterator]`) there will be error "Thread restarting only allowed when generator is a function". And thread will be finished (`FINISHED` state)
 
 If delay is 0: (immediate restart)
 > Changes it's state to `RUNNING`.
@@ -216,7 +225,7 @@ Thread gets added to runner's suspended queue, which will resume execution as so
 
 Internal generator position is preserved.
 
-Note: `runner.time` is updated to `Game.time` only at the biginning of `runner.tick()`, so better not to use `schedule(Game.time + delay)` if you are calling it before `runner.tick()`.
+> Note: `runner.time` is updated to `Game.time` only at the biginning of `runner.tick()`, so better not to use `schedule(Game.time + delay)` if you are calling it before `runner.tick()`.
 
 Allowed states: `RUNNING`, `SUSPENED`
 

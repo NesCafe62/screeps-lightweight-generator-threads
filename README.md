@@ -130,12 +130,17 @@ class RoomManager {
 ```
 
 > Note: `yield thread.someMethod();` is same as
+> 
 > `thread.someMethod();`
+> 
 > `yield;`
+> 
 > it is just shorter
 
 > Note: `yield` result is not used.
+> 
 > But this is different from `yield * someNestedMethod()`, this will call nested generator function.
+> 
 > Can pass therad reference to access it inside method (for execution control): `yield * someNestedMethod(thread);`
 
 ## Thread states

@@ -177,7 +177,7 @@ If delay is > 0: (delayed restart)
 >
 > Thread gets added to runner's suspended queue, which will resume execution (but from begginning of the generator function) as soon as required `Game.time` will come
 
-IF delay is Infinity: (restart with suspend)
+If delay is Infinity: (restart with suspend)
 > Changes it's state to `SUSPENDED`.
 >
 > But will not add thread to runner's suspened queue. (Will need to resume the thread by calling `resume()` or `restart()`)

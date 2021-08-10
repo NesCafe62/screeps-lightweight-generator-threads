@@ -342,7 +342,7 @@ You can override methods to add additional logic.
 class CreepThread extends Thread {
 
 	constructor(creepEntity) {
-		// you can specify other method instead of own Thread "run"
+		// using creepEntity's "run" method instead of own Thread "run"
 		super(CreepsRunner, creepEntity.run.bind(creepEntity), false);
 		this.creep = creepEntity;
 	}
